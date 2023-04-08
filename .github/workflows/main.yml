@@ -1,19 +1,26 @@
-name: example
+name: s3_cicd_pipeline
 
 on:
     push:
+        branches:
+            - main
 
 jobs:
-    s3ls:
+    sync_to_s3:
         runs-on: ubuntu-latest
         permissions:
             id-token: write
             contents: read
         steps:
-            - uses: aws-actions/configure-aws-credentials@v1
+            - name: Checkout repository
+              uses: actions/checkout@v2
+
+            - name: Configure AWS Credentials
+              uses: aws-actions/configure-aws-credentials@v1
               with:
-                  aws-region: "us-east-1" # リージョンを指定
+                  aws-region: "ap-northeast-1" # リージョンを指定
                   role-to-assume: "arn:aws:iam::123358216469:role/oidc-example-role" # 作成した IAM ロールの ARN
 
-            # プライベートな S3 バケットを読み取ってみる
-            - run: aws s3 ls s3://my-potal-2023-march
+            - name: Copy code to S3
+              run: |
+                  aws s3 sync ./src s3://my-potal-2023-march/my-potal
