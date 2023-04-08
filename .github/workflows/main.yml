@@ -1,24 +1,19 @@
-name: Build React on S3
+name: example
+
 on:
     push:
-        branches:
-            - master
+
 jobs:
-    build:
+    s3ls:
         runs-on: ubuntu-latest
+        permissions:
+            id-token: write
+            contents: read
         steps:
-            - name: Checkout
-              uses: actions/checkout@master # リポジトリをチェックアウト
+            - uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-region: "us-east-1" # リージョンを指定
+                  role-to-assume: "arn:aws:iam::<AWSアカウントID>:role/<IAMロール名>" # 作成した IAM ロールの ARN
 
-            - name: Install Dependencies
-              run: npm install
-
-            - name: Build
-              run: npm run build # React ビルド
-
-            - name: Deploy # S3にデプロイ
-              env:
-                  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-                  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-              run: |
-                  aws s3 cp --recursive --region ap-northeast-1 build s3://my-potal-2023-march
+            # プライベートな S3 バケットを読み取ってみる
+            - run: aws s3 ls s3://oidc-example
