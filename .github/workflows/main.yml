@@ -22,5 +22,6 @@ jobs:
                   role-to-assume: "arn:aws:iam::123358216469:role/oidc-example-role" # 作成した IAM ロールの ARN
 
             - name: Copy code to S3
+              # sync commits to s3 bucket/my-potal
               run: |
                   aws s3 sync ./src s3://my-potal-2023-march/my-potal
