@@ -2776,6 +2776,9 @@ input[type="button"]:disabled,
     display: flex;
     justify-content: space-between;
 }
+.title_github h4 {
+    display: inline-block;
+}
 
 .features article .inner > :last-child {
     margin-bottom: 0;
@@ -2810,6 +2813,12 @@ input[type="button"]:disabled,
     top: 0;
     width: 23em;
     right: 0;
+}
+.inline-svg {
+    width: 1em;
+    height: 1em;
+    vertical-align: middle;
+    fill: currentColor;
 }
 
 #header h1,
