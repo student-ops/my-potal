@@ -2771,10 +2771,21 @@ input[type="button"]:disabled,
     display: inline-block;
     vertical-align: middle;
     width: 50%;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+.title_github {
+    display: flex;
+    justify-content: space-between;
 }
 
 .features article .inner > :last-child {
     margin-bottom: 0;
+}
+
+.github_link {
+    color: rgb(0, 139, 194);
+    border-bottom: none;
 }
 
 /* Header */
