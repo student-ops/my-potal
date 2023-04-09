@@ -1,10 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
     <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <meta charset="utf-8" />
+        <meta property="og:title" content="Open Graph Protocolの例" />
+        <meta
+            property="og:description"
+            content="このページはOpen Graph Protocolの使用例です。" />
+        <meta property="og:image" content="images/iron-crab.jpg" />
+        <meta property="og:url" content="https://example.com/ogp-example" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ja_JP" />
+        <title>Open Graph Protocolの例</title>
     </head>
-    <body> </body>
+    <body>
+        <h1 id="og-title"></h1>
+        <p id="og-description"></p>
+        <img id="og-image" src="" alt="" />
+        <script>
+            const metaTags = document.getElementsByTagName("meta")
+            for (let i = 0; i < metaTags.length; i++) {
+                const property = metaTags[i].getAttribute("property")
+                if (property === "og:title") {
+                    const ogTitle = metaTags[i].getAttribute("content")
+                    document.getElementById("og-title").textContent = ogTitle
+                } else if (property === "og:description") {
+                    const ogDescription = metaTags[i].getAttribute("content")
+                    document.getElementById("og-description").textContent =
+                        ogDescription
+                } else if (property === "og:image") {
+                    const ogImage = metaTags[i].getAttribute("content")
+                    document.getElementById("og-image").src = ogImage
+                }
+            }
+        </script>
+    </body>
 </html>
